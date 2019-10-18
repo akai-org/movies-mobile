@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">AkaiMovies</string>
+
+    <!--FRAGMENTS-->
+    <string name="search_movie_fragment">SearchMovieFragment</string>
+    <string name="movie_details_fragment">MovieDetailsFragment</string>
+</resources>
