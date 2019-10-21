@@ -26,6 +26,7 @@ android:
     - 'android-sdk-license-.+'
     - 'google-gdk-license-.+'
 before_script:
+  - yes | sdkmanager --licenses && sdkmanager --update
   - chmod +x gradlew
   - echo no | android create avd --force -n test -t android-$ANDROID_EMU_API_LEVEL --abi google_apis/$ANDROID_ABI
   - emulator -avd test -no-window &
