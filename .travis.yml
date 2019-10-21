@@ -11,7 +11,7 @@ env:
     - EMU_NAME=test
     - EMU_API_LEVEL=23
     - EMU_ABI=armeabi-v7a
-#    - EMU_ABI=x86
+
 
 android:
   components:
@@ -25,14 +25,12 @@ android:
   licenses:
     - 'android-sdk-license-.+'
 
-before_install:
+before_script:
   - echo yes | sdkmanager "build-tools;28.0.3"
   - echo yes | sdkmanager "platforms;android-28"
   - chmod +x gradlew
   - yes | sdkmanager "platforms;android-$ANDROID_API_LEVEL"
   - yes | sdkmanager "platforms;android-$EMU_API_LEVEL"
-
-before_script:
   - echo no | android create avd --force -n $EMU_NAME -t android-$EMU_API_LEVEL --abi google_apis/$EMU_ABI
   - emulator -avd $EMU_NAME -no-window &
   - android-wait-for-emulator
