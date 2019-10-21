@@ -32,7 +32,7 @@ before_script:
   - yes | sdkmanager "platforms;android-$ANDROID_API_LEVEL"
   - yes | sdkmanager "platforms;android-$EMU_API_LEVEL"
   - echo no | android create avd --force -n $EMU_NAME -t android-$EMU_API_LEVEL --abi google_apis/$EMU_ABI
-  - emulator -avd $EMU_NAME -no-window &
+  - emulator -avd $EMU_NAME -no-skin -no-audio -no-window -gpu off &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 before_cache:
