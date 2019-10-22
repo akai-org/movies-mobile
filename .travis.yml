@@ -49,7 +49,7 @@ script:
   - ./gradlew clean
   - ./gradlew build
   - ./gradlew assembleAndroidTest
-  - ./gradlew connectedCheck --stacktrace
+  - travis_wait 30 ./gradlew connectedCheck --stacktrace
   - ./gradlew assembleRelease --stacktrace
 deploy:
   provider: releases
