@@ -9,7 +9,7 @@ env:
     - ANDROID_API_LEVEL=28
     - ANDROID_BUILD_TOOLS_VERSION=29.0.2
     - EMU_NAME=test
-    - EMU_API_LEVEL=23
+    - EMU_API_LEVEL=24
     - EMU_ABI=armeabi-v7a
 #    - EMU_ABI=x86
 
@@ -47,7 +47,7 @@ cache:
     - $HOME/.android/build-cache
 script:
   - ./gradlew clean
-  - ./gradlew build
+  - ./gradlew build -Pr
   - ./gradlew connectedCheck --stacktrace
   - ./gradlew assembleRelease --stacktrace
 deploy:
