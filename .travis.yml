@@ -48,7 +48,7 @@ cache:
 script:
   - ./gradlew clean
   - ./gradlew build
-  - ./dradlew connectedCheck --stacktrace
+  - ./gradlew connectedCheck --stacktrace
   - ./gradlew assembleRelease --stacktrace
 deploy:
   provider: releases
