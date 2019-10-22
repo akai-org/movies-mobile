@@ -11,7 +11,7 @@ env:
     - EMU_NAME=test
     - EMU_API_LEVEL=23
     - EMU_ABI=armeabi-v7a
-
+#    - EMU_ABI=x86
 
 android:
   components:
@@ -25,14 +25,16 @@ android:
   licenses:
     - 'android-sdk-license-.+'
 
-before_script:
+before_install:
   - echo yes | sdkmanager "build-tools;28.0.3"
   - echo yes | sdkmanager "platforms;android-28"
   - chmod +x gradlew
   - yes | sdkmanager "platforms;android-$ANDROID_API_LEVEL"
   - yes | sdkmanager "platforms;android-$EMU_API_LEVEL"
+
+before_script:
   - echo no | android create avd --force -n $EMU_NAME -t android-$EMU_API_LEVEL --abi google_apis/$EMU_ABI
-  - emulator -avd $EMU_NAME -no-skin -no-window -gpu off &
+  - emulator -avd $EMU_NAME -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 before_cache:
@@ -44,7 +46,8 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 script:
-  - ./gradlew clean installDebug
+  - ./gradlew clean
+  - ./gradlew build connectedCheck
   - ./gradlew test
   - ./gradlew testDebugUnitTest
   - ./gradlew connectedDebugAndroidTest
