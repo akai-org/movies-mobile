@@ -48,11 +48,12 @@ cache:
 script:
   - ./gradlew clean
   - ./gradlew build connectedCheck --stacktrace
+  - ./gradlew assembleRelease --stacktrace
 deploy:
   provider: releases
   api_key:
     secure: $GITHUB_API_KEY
-  file: "app/release/app-release.apk"
+  file: "app/build/outputs/apk/release/app-release.apk"
   file_glob: true
   skip_cleanup: true
   on:
