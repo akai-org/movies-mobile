@@ -48,6 +48,7 @@ cache:
 script:
   - ./gradlew clean
   - ./gradlew build
+  - ./gradlew assembleAndroidTest
   - ./gradlew connectedCheck --stacktrace
   - ./gradlew assembleRelease --stacktrace
 deploy:
