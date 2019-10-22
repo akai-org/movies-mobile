@@ -47,8 +47,8 @@ cache:
     - $HOME/.android/build-cache
 script:
   - ./gradlew clean
-  - ./gradlew build -Pr
-  - ./gradlew connectedCheck --stacktrace
+  - ./gradlew build
+  - ./gradlew connectedCheck -PdisablePreDex --stacktrace
   - ./gradlew assembleRelease --stacktrace
 deploy:
   provider: releases
