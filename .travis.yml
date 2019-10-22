@@ -46,7 +46,4 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 script:
-  - ./gradlew build connectedCheck
-  - ./gradlew test
-  - ./gradlew testDebugUnitTest
-  - ./gradlew connectedDebugAndroidTest
+  - ./gradlew build connectedCheck --stacktrace
