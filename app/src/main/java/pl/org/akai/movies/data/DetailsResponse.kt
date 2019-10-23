@@ -61,7 +61,7 @@ data class DetailsResponse(
     val poster: String,
 
     @Expose
-    @SerializedName("Ratings ")
+    @SerializedName("Ratings")
     val ratings: List<Rating>,
 
     @Expose
