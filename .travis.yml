@@ -33,6 +33,8 @@ before_install:
   - yes | sdkmanager "platforms;android-$EMU_API_LEVEL"
 
 before_script:
+  - export t=$(< ./gradlew -q pV)
+  - echo $t
   - echo no | android create avd --force -n $EMU_NAME -t android-$EMU_API_LEVEL --abi google_apis/$EMU_ABI
   - emulator -avd $EMU_NAME -no-window &
   - android-wait-for-emulator
