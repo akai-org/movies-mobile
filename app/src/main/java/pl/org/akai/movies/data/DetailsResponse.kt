@@ -3,11 +3,6 @@ package pl.org.akai.movies.data
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-/*
-http://www.omdbapi.com/?i=tt3896198&apikey=dbeb1564
-["Title", "Year", "Rated", "Released", "Runtime", "Genre", "Director", "Writer", "Actors", "Plot", "Language", "Country", "Awards", "Poster", "Ratings", "Metascore", "imdbRating", "imdbVotes", "imdbID", "Type", "DVD", "BoxOffice", "Production", "Website", "Response"]
- */
-
 data class DetailsResponse(
     @Expose
     @SerializedName("Title")
