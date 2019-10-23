@@ -54,9 +54,6 @@ script:
 before_deploy:
   - TRAVIS_TAG="$(./gradlew -q pV)"
   - TRAVIS_TAG="Release-${TRAVIS_TAG}"
-  - git config --local user.name $GIT_USER_NAME
-  - git config --local user.email $GIT_USER_EMAIL
-  - git tag $TRAVIS_TAG
 deploy:
   provider: releases
   api_key:
@@ -67,4 +64,3 @@ deploy:
   on:
     repo: akai-org/movies-mobile
     branch: master
-    tags: true
