@@ -33,10 +33,6 @@ before_install:
   - yes | sdkmanager "platforms;android-$EMU_API_LEVEL"
 
 before_script:
-  - tag="$(./gradlew -q pV)"
-  - echo $tag
-  - tag="Release-${tag}"
-  - echo $tag
   - echo no | android create avd --force -n $EMU_NAME -t android-$EMU_API_LEVEL --abi google_apis/$EMU_ABI
   - emulator -avd $EMU_NAME -no-window &
   - android-wait-for-emulator
@@ -55,6 +51,12 @@ script:
   - ./gradlew assembleAndroidTest
   - travis_wait 30 ./gradlew connectedCheck --stacktrace
   - ./gradlew assembleRelease --stacktrace
+before_deploy:
+  - TRAVIS_TAG="$(./gradlew -q pV)"
+  - TRAVIS_TAG="Release-${TRAVIS_TAG}"
+  - git config --local user.name $GIT_USER_NAME
+  - git config --local user.email $GIT_USER_EMAIL
+  - git tag $TRAVIS_TAG
 deploy:
   provider: releases
   api_key:
