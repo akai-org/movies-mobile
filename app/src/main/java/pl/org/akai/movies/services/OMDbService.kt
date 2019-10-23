@@ -13,6 +13,6 @@ interface OMDbService {
             Call<SearchRespone>
 
     @GET("/")
-    fun getMovieDetails(@Query("apikey") apikey: String, @Query("i") query: String):
+    fun getMovieDetails(@Query("apikey") apikey: String, @Query("i") imdbID: String):
             Call<DetailsResponse>
 }

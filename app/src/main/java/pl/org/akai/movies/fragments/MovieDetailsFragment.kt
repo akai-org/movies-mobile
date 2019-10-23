@@ -30,7 +30,7 @@ class MovieDetailsFragment : BaseFragment() {
                     call: Call<DetailsResponse>, response: Response<DetailsResponse>
                 ) {
                     when (response.code()) {
-                        200 -> Log.d("MyLogMDF", response.body()!!.toString())
+                        200 -> Log.d("MyLogMDF", "${response.body()}")
                     }
                 }
 
