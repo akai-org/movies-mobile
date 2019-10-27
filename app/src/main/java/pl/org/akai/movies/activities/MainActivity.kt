@@ -1,7 +1,7 @@
 package pl.org.akai.movies.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import pl.org.akai.movies.R
 
 class MainActivity : AppCompatActivity() {
