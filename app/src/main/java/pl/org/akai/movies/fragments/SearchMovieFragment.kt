@@ -19,7 +19,8 @@ import retrofit2.Response
 
 class SearchMovieFragment : BaseFragment() {
 
-    private lateinit var movieAdapter: MovieAdapter
+    private val movieAdapter = MovieAdapter(arrayListOf())
+
 
     override val layoutId: Int
         get() = R.layout.fragment_search_movie
@@ -37,41 +38,43 @@ class SearchMovieFragment : BaseFragment() {
 
         moviesSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
+                getMovies(query)
                 return false
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                movieAdapter.filter.filter(newText)
+                getMovies(newText)
                 return false
             }
         })
 
-        service.getSerchedMovies("6ade0e7b", "abc").enqueue(object : Callback<SearchRespone> {
-            override fun onFailure(call: Call<SearchRespone>, t: Throwable) {}
-
-            override fun onResponse(call: Call<SearchRespone>, response: Response<SearchRespone>) {
-                when (response.code()) {
-                    200 -> {
-                        for (movie in response.body()!!.search) {
-                            Log.d("MyLog", "$movie")
-                        }
-                    }
-                    else -> {
-                        Log.d("MyLog", "Call: ${call.request().url()}")
-                        Log.d("MyLog", "${call.request().headers()}")
-                    }
-                }
-            }
-
-        })
 
         initRecyclerView()
 
     }
 
-    private fun addDataSet() {
-        TODO("Tutaj zamiast data należy wkleić listę danych do filmów")
-        movieAdapter.submitList(data)
+    private fun getMovies(query: String) {
+        if (query.length > 3) { // poniżej 3 jest za dużo wyników
+            service.getSerchedMovies("6ade0e7b", query).enqueue(object : Callback<SearchRespone> {
+                override fun onFailure(call: Call<SearchRespone>, t: Throwable) {}
+
+                override fun onResponse(
+                    call: Call<SearchRespone>,
+                    response: Response<SearchRespone>
+                ) {
+                    when (response.code()) {
+                        200 -> {
+                            movieAdapter.submitList(response.body()!!.search)
+                        }
+                        else -> {
+                            Log.d("MyLog", "Call: ${call.request().url()}")
+                            Log.d("MyLog", "${call.request().headers()}")
+                        }
+                    }
+                }
+
+            })
+        }
     }
 
     private fun initRecyclerView() {
@@ -79,7 +82,6 @@ class SearchMovieFragment : BaseFragment() {
             layoutManager = LinearLayoutManager(context)
             val topSpacingDecoration = TopSpacingItemDecoration(30)
             addItemDecoration(topSpacingDecoration)
-            movieAdapter = MovieAdapter()
             adapter = movieAdapter
         }
 
