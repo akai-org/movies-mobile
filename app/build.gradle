@@ -40,6 +40,11 @@ android {
     }
 }
 
+task printVersion {
+    doLast {
+        println android.defaultConfig.versionName
+    }
+}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

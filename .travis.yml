@@ -49,8 +49,11 @@ script:
   - ./gradlew clean
   - ./gradlew build
   - ./gradlew assembleAndroidTest
-  - ./gradlew connectedCheck --stacktrace
+  - travis_wait 30 ./gradlew connectedCheck --stacktrace
   - ./gradlew assembleRelease --stacktrace
+before_deploy:
+  - TRAVIS_TAG="$(./gradlew -q pV)"
+  - TRAVIS_TAG="Release-${TRAVIS_TAG}"
 deploy:
   provider: releases
   api_key:
@@ -61,4 +64,3 @@ deploy:
   on:
     repo: akai-org/movies-mobile
     branch: master
-    tags: true
