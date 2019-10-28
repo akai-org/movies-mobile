@@ -6,15 +6,22 @@
     android:orientation="vertical"
     tools:context=".fragments.SearchMovieFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello World" />
-
     <Button
         android:id="@+id/detailsButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Go to details" />
+
+    <SearchView
+        android:id="@+id/moviesSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/moviesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical" />
+
 
 </LinearLayout>
