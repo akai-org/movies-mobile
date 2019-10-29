@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary" />
 
     <TextView
         android:layout_width="match_parent"
@@ -68,93 +72,93 @@
                     android:textAlignment="center">
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/year"
+                        style="@style/detail"
                         android:text="year\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/rated"
+                        style="@style/detail"
                         android:text="rated\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/released"
+                        style="@style/detail"
                         android:text="released\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/genre"
+                        style="@style/detail"
                         android:text="genre\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/director"
+                        style="@style/detail"
                         android:text="director\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/runtime"
+                        style="@style/detail"
                         android:text="runtime\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/writer"
+                        style="@style/detail"
                         android:text="writer\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/actors"
+                        style="@style/detail"
                         android:text="actors\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/ratings"
+                        style="@style/detail"
                         android:text="ratings\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/metascore"
+                        style="@style/detail"
                         android:text="metascore\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/imdbRating"
+                        style="@style/detail"
                         android:text="imdbRating\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/imdbVotes"
+                        style="@style/detail"
                         android:text="imdbVotes\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/type"
+                        style="@style/detail"
                         android:text="type\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/imdbID"
+                        style="@style/detail"
                         android:text="imdbID\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/dvd"
+                        style="@style/detail"
                         android:text="dvd\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/boxOffice"
+                        style="@style/detail"
                         android:text="boxOffice\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/production"
+                        style="@style/detail"
                         android:text="production\n" />
 
                     <TextView
-                        style="@style/detail"
                         android:id="@+id/website"
+                        style="@style/detail"
                         android:text="website\n" />
 
 
