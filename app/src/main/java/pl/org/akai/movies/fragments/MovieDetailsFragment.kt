@@ -19,8 +19,13 @@ class MovieDetailsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toolbar.navigationIcon = context!!.getDrawable(R.drawable.ic_back)
+        toolbar.setNavigationOnClickListener {
+            navigateBack()
+        }
         backButton.setOnClickListener {
-            findNavController().navigate(R.id.toSearchMovieFragment)
+            navigateBack()
         }
         service.getMovieDetails("dbeb1564", "tt3896198")
             .enqueue(object : Callback<DetailsResponse> {
@@ -35,6 +40,10 @@ class MovieDetailsFragment : BaseFragment() {
                 }
 
             })
+    }
+
+    private fun navigateBack() {
+        findNavController().navigate(R.id.toSearchMovieFragment)
     }
 }
 
