@@ -1,6 +1,5 @@
 package pl.org.akai.movies.list
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,7 +58,6 @@ class MovieAdapter(val movies: ArrayList<Movie>, private val fragment: BaseFragm
                 val bundle = MovieDetailsFragment.createBundle(movie.imdbId)
                 fragment.findNavController().navigate(R.id.toMovieDetails, bundle)
             }
-
 
             val requestOptions = RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background)
