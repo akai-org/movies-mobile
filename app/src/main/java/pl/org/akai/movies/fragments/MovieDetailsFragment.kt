@@ -20,6 +20,7 @@ class MovieDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val imdbId = arguments!!.get("imdbId") as String
         toolbar.navigationIcon = context!!.getDrawable(R.drawable.ic_back)
         toolbar.setNavigationOnClickListener {
             navigateBack()
@@ -27,7 +28,7 @@ class MovieDetailsFragment : BaseFragment() {
         backButton.setOnClickListener {
             navigateBack()
         }
-        service.getMovieDetails("dbeb1564", "tt3896198")
+        service.getMovieDetails("dbeb1564", imdbId)
             .enqueue(object : Callback<DetailsResponse> {
                 override fun onFailure(call: Call<DetailsResponse>, t: Throwable) {}
 
