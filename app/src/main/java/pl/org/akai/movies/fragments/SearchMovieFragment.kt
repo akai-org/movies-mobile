@@ -19,7 +19,7 @@ import retrofit2.Response
 
 class SearchMovieFragment : BaseFragment() {
 
-    private val movieAdapter = MovieAdapter(arrayListOf(), this)
+    private val movieAdapter = MovieAdapter(arrayListOf(), findNavController())
 
 
     override val layoutId: Int

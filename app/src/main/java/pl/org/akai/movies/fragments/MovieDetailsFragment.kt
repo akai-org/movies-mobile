@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_movie_details.*
+import pl.org.akai.movies.Constants
 import pl.org.akai.movies.R
 import pl.org.akai.movies.data.DetailsResponse
 import retrofit2.Call
@@ -20,7 +21,7 @@ class MovieDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imdbId = arguments!!.get("imdbId") as String
+        val imdbId = arguments!!.get(Constants.IMBD_ID) as String
         toolbar.navigationIcon = context!!.getDrawable(R.drawable.ic_back)
         toolbar.setNavigationOnClickListener {
             navigateBack()
