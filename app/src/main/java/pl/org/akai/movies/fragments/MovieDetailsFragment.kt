@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_movie_details.*
-import pl.org.akai.movies.Constants
 import pl.org.akai.movies.R
 import pl.org.akai.movies.data.DetailsResponse
 import retrofit2.Call
@@ -21,7 +20,7 @@ class MovieDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imdbId = arguments!!.get(Constants.IMBD_ID) as String
+        val imdbId = getImbdIdFromBundle(arguments)
         toolbar.navigationIcon = context!!.getDrawable(R.drawable.ic_back)
         toolbar.setNavigationOnClickListener {
             navigateBack()
@@ -29,7 +28,7 @@ class MovieDetailsFragment : BaseFragment() {
         backButton.setOnClickListener {
             navigateBack()
         }
-        service.getMovieDetails("dbeb1564", imdbId)
+        service.getMovieDetails("dbeb1564", imdbId!!)
             .enqueue(object : Callback<DetailsResponse> {
                 override fun onFailure(call: Call<DetailsResponse>, t: Throwable) {}
 
@@ -46,6 +45,18 @@ class MovieDetailsFragment : BaseFragment() {
 
     private fun navigateBack() {
         findNavController().navigate(R.id.toSearchMovieFragment)
+    }
+
+    companion object {
+        private val IMBD_ID = "imbdId"
+
+        fun createImbdIdBundle(imbdId: String): Bundle {
+            return Bundle().apply { putString(IMBD_ID, imbdId) }
+        }
+
+        fun getImbdIdFromBundle(bundle: Bundle?): String? {
+            return bundle?.getString(IMBD_ID)
+        }
     }
 }
 
