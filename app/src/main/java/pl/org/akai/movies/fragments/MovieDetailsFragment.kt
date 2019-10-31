@@ -20,7 +20,7 @@ class MovieDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imdbId = arguments!!.get("imdbId") as String
+        val imdbId = getImbdIdFromBundle(arguments)
         toolbar.navigationIcon = context!!.getDrawable(R.drawable.ic_back)
         toolbar.setNavigationOnClickListener {
             navigateBack()
@@ -28,7 +28,7 @@ class MovieDetailsFragment : BaseFragment() {
         backButton.setOnClickListener {
             navigateBack()
         }
-        service.getMovieDetails("dbeb1564", imdbId)
+        service.getMovieDetails("dbeb1564", imdbId!!)
             .enqueue(object : Callback<DetailsResponse> {
                 override fun onFailure(call: Call<DetailsResponse>, t: Throwable) {}
 
@@ -45,6 +45,18 @@ class MovieDetailsFragment : BaseFragment() {
 
     private fun navigateBack() {
         findNavController().navigate(R.id.toSearchMovieFragment)
+    }
+
+    companion object {
+        private val IMBD_ID = "imbdId"
+
+        fun createImbdIdBundle(imbdId: String): Bundle {
+            return Bundle().apply { putString(IMBD_ID, imbdId) }
+        }
+
+        fun getImbdIdFromBundle(bundle: Bundle?): String? {
+            return bundle?.getString(IMBD_ID)
+        }
     }
 }
 
