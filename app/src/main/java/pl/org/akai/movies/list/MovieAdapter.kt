@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.movie_list_item.view.*
 import pl.org.akai.movies.R
 import pl.org.akai.movies.data.Movie
 import pl.org.akai.movies.fragments.BaseFragment
+import pl.org.akai.movies.fragments.MovieDetailsFragment
 
 class MovieAdapter(val movies: ArrayList<Movie>, private val fragment: BaseFragment) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -55,8 +56,7 @@ class MovieAdapter(val movies: ArrayList<Movie>, private val fragment: BaseFragm
             movieType.text = movie.type
 
             itemView.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putString("imdbId", movie.imdbId)
+                val bundle = MovieDetailsFragment.createBundle(movie.imdbId)
                 fragment.findNavController().navigate(R.id.toMovieDetails, bundle)
             }
 
