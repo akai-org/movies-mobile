@@ -19,7 +19,7 @@ import retrofit2.Response
 
 class SearchMovieFragment : BaseFragment() {
 
-    private val movieAdapter = MovieAdapter(arrayListOf(), this)
+    private lateinit var movieAdapter: MovieAdapter
 
 
     override val layoutId: Int
@@ -28,6 +28,8 @@ class SearchMovieFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        movieAdapter = MovieAdapter(arrayListOf(), this.findNavController())
 
         detailsButton.setOnClickListener {
             findNavController().navigate(R.id.toMovieDetails)

@@ -5,17 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.NavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import kotlinx.android.synthetic.main.movie_list_item.view.*
 import pl.org.akai.movies.R
 import pl.org.akai.movies.data.Movie
-import pl.org.akai.movies.fragments.BaseFragment
 import pl.org.akai.movies.fragments.MovieDetailsFragment
 
-class MovieAdapter(val movies: ArrayList<Movie>, private val fragment: BaseFragment) :
+class MovieAdapter(val movies: ArrayList<Movie>, private val navController: NavController) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MovieViewHolder(
@@ -56,7 +55,7 @@ class MovieAdapter(val movies: ArrayList<Movie>, private val fragment: BaseFragm
 
             itemView.setOnClickListener {
                 val bundle = MovieDetailsFragment.createBundle(movie.imdbId)
-                fragment.findNavController().navigate(R.id.toMovieDetails, bundle)
+                navController.navigate(R.id.toMovieDetails, bundle)
             }
 
             val requestOptions = RequestOptions()
