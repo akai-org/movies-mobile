@@ -3,8 +3,10 @@ package pl.org.akai.movies.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,10 +23,8 @@ class SearchMovieFragment : BaseFragment() {
 
     private val movieAdapter = MovieAdapter(arrayListOf())
 
-
     override val layoutId: Int
         get() = R.layout.fragment_search_movie
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -33,10 +33,21 @@ class SearchMovieFragment : BaseFragment() {
             findNavController().navigate(R.id.toMovieDetails)
         }
 
-//        wyświetlanie przycisku done zamiast lupy na klawiaturze
-        moviesSearchView.imeOptions = EditorInfo.IME_ACTION_DONE
+        initRecyclerView()
 
-        moviesSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search_menu, menu)
+        val searchItem: MenuItem = menu.findItem(R.id.action_search)
+        val searchView: SearchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
             override fun onQueryTextSubmit(query: String): Boolean {
                 getMovies(query)
                 return false
@@ -48,10 +59,12 @@ class SearchMovieFragment : BaseFragment() {
             }
         })
 
+        searchView.queryHint = getText(R.string.search_view_text)
 
-        initRecyclerView()
-
+        super.onCreateOptionsMenu(menu, inflater)
     }
+
+
 
     private fun getMovies(query: String) {
         if (query.length > 3) { // poniżej 3 jest za dużo wyników
