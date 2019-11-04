@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -159,8 +166,17 @@
 
             </LinearLayout>
 
+
         </ScrollView>
 
+        <TextView
+            android:id="@+id/plot"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            android:layout_margin="5dp"
+            android:background="@android:color/darker_gray"
+            android:text="plot: "
+            android:textSize="20sp" />
 
     </LinearLayout>
 

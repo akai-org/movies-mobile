@@ -6,6 +6,12 @@
     android:orientation="vertical"
     tools:context=".fragments.SearchMovieFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary" />
+
     <Button
         android:id="@+id/detailsButton"
         android:layout_width="wrap_content"

@@ -19,26 +19,33 @@ class MovieDetailsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        toolbar.navigationIcon = context!!.getDrawable(R.drawable.ic_back)
+        toolbar.setNavigationOnClickListener {
+            navigateBack()
+        }
         backButton.setOnClickListener {
-            findNavController().navigate(R.id.toSearchMovieFragment)
+            navigateBack()
         }
         service.getMovieDetails("dbeb1564", "tt3896198")
             .enqueue(object : Callback<DetailsResponse> {
                 override fun onFailure(call: Call<DetailsResponse>, t: Throwable) {}
 
-
                 override fun onResponse(
                     call: Call<DetailsResponse>, response: Response<DetailsResponse>
                 ) {
                     when (response.code()) {
-                        200 -> {
-                            setupMovieData(response.body()!!)
-
-                        }
+                        200 -> Log.d("MyLogMDF", "${response.body()}")
                     }
                 }
+
             })
     }
+
+    private fun navigateBack() {
+        findNavController().navigate(R.id.toSearchMovieFragment)
+    }
+}
 
     fun setupMovieData(detailsResponse: DetailsResponse) {
         title.text = detailsResponse.title
