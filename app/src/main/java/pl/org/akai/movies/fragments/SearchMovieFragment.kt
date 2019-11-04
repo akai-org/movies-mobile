@@ -29,7 +29,11 @@ class SearchMovieFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        movieAdapter = MovieAdapter(arrayListOf(), this.findNavController())
+
+        movieAdapter = MovieAdapter(arrayListOf()) {
+            val action = SearchMovieFragmentDirections.toMovieDetails(it.imdbId)
+            findNavController().navigate(action)
+        }
 
         detailsButton.setOnClickListener {
             findNavController().navigate(R.id.toMovieDetails)
