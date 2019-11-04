@@ -1,6 +1,7 @@
 package pl.org.akai.movies.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -24,9 +25,6 @@ class MovieDetailsFragment : BaseFragment() {
         toolbar.setNavigationOnClickListener {
             navigateBack()
         }
-        backButton.setOnClickListener {
-            navigateBack()
-        }
         service.getMovieDetails("dbeb1564", "tt3896198")
             .enqueue(object : Callback<DetailsResponse> {
                 override fun onFailure(call: Call<DetailsResponse>, t: Throwable) {}
@@ -35,7 +33,10 @@ class MovieDetailsFragment : BaseFragment() {
                     call: Call<DetailsResponse>, response: Response<DetailsResponse>
                 ) {
                     when (response.code()) {
-                        200 -> Log.d("MyLogMDF", "${response.body()}")
+                        200 -> {
+                            Log.d("MyLogMDF", "${response.body()}")
+                            setupMovieData(response.body()!!)
+                        }
                     }
                 }
 
@@ -45,9 +46,9 @@ class MovieDetailsFragment : BaseFragment() {
     private fun navigateBack() {
         findNavController().navigate(R.id.toSearchMovieFragment)
     }
-}
 
     fun setupMovieData(detailsResponse: DetailsResponse) {
+
         title.text = detailsResponse.title
         year.text = getString(R.string.year, detailsResponse.year)
         rated.text = getString(R.string.rated, detailsResponse.rated)

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -13,14 +11,6 @@
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.1"
-        android:background="@android:color/holo_blue_dark"
-        android:text="Movie details"
-        android:textAlignment="center"
-        android:textSize="21sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,8 +36,8 @@
                     android:id="@+id/poster"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
                     android:layout_margin="15dp"
+                    android:layout_weight="1"
                     android:background="@android:color/darker_gray"
                     android:scaleType="center" />
 
@@ -59,7 +49,6 @@
                     android:layout_margin="5dp"
                     android:layout_weight="1"
                     android:background="@android:color/darker_gray"
-                    android:text="plot: "
                     android:textSize="20sp" />
 
             </LinearLayout>
@@ -86,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="5sp"
                     android:singleLine="false"
-                    android:text="Title\n"
+                    android:text=""
                     android:textAlignment="center"
                     android:textSize="20sp" />
 
@@ -94,74 +83,67 @@
                 <TextView
                     android:id="@+id/year"
                     style="@style/detail"
-                    android:text="year:\n   " />
+                    android:text="@string/year" />
 
                 <TextView
                     android:id="@+id/rated"
                     style="@style/detail"
-                    android:text="rated:\n   " />
+                    android:text="@string/rated" />
 
                 <TextView
                     android:id="@+id/released"
                     style="@style/detail"
-                    android:text="released:\n   " />
+                    android:text="@string/released" />
 
                 <TextView
                     android:id="@+id/genre"
                     style="@style/detail"
-                    android:text="genre:\n   " />
+                    android:text="@string/genre" />
 
                 <TextView
                     android:id="@+id/director"
                     style="@style/detail"
-                    android:text="director:\n   " />
+                    android:text="@string/director" />
 
                 <TextView
                     android:id="@+id/runtime"
                     style="@style/detail"
-                    android:text="runtime:\n   " />
+                    android:text="@string/runtime" />
 
                 <TextView
                     android:id="@+id/writer"
                     style="@style/detail"
-                    android:text="writer:\n" />
+                    android:text="@string/writer" />
 
                 <TextView
                     android:id="@+id/actors"
                     style="@style/detail"
-                    android:text="actors:\n" />
+                    android:text="@string/actors" />
 
                 <TextView
                     android:id="@+id/metascore"
                     style="@style/detail"
-                    android:text="metascore:\n" />
-
-
-                <TextView
-                    android:id="@+id/type"
-                    style="@style/detail"
-                    android:text="type:\n" />
-
+                    android:text="@string/metascore" />
 
                 <TextView
                     android:id="@+id/dvd"
                     style="@style/detail"
-                    android:text="dvd:\n" />
+                    android:text="@string/dvd" />
 
                 <TextView
                     android:id="@+id/boxOffice"
                     style="@style/detail"
-                    android:text="boxOffice:\n" />
+                    android:text="@string/box_office" />
 
                 <TextView
                     android:id="@+id/production"
                     style="@style/detail"
-                    android:text="production:\n" />
+                    android:text="@string/production" />
 
                 <TextView
                     android:id="@+id/website"
                     style="@style/detail"
-                    android:text="website:\n" />
+                    android:text="@string/website" />
 
 
             </LinearLayout>
@@ -169,26 +151,6 @@
 
         </ScrollView>
 
-        <TextView
-            android:id="@+id/plot"
-            android:layout_rowWeight="1"
-            android:layout_columnWeight="1"
-            android:layout_margin="5dp"
-            android:background="@android:color/darker_gray"
-            android:text="plot: "
-            android:textSize="20sp" />
-
     </LinearLayout>
-
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:layout_weight="0.02"
-        android:background="@android:color/holo_blue_dark"
-        android:text="Back"
-        android:textAlignment="center" />
-
 
 </LinearLayout>
