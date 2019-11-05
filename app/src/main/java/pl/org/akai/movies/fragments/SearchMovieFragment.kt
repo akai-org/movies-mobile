@@ -35,10 +35,6 @@ class SearchMovieFragment : BaseFragment() {
             findNavController().navigate(action)
         }
 
-        detailsButton.setOnClickListener {
-            findNavController().navigate(R.id.toMovieDetails)
-        }
-
 
 //        wyświetlanie przycisku done zamiast lupy na klawiaturze
         moviesSearchView.imeOptions = EditorInfo.IME_ACTION_DONE

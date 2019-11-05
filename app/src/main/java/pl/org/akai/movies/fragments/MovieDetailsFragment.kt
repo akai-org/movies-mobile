@@ -27,9 +27,6 @@ class MovieDetailsFragment : BaseFragment() {
         toolbar.setNavigationOnClickListener {
             navigateBack()
         }
-        backButton.setOnClickListener {
-            navigateBack()
-        }
 
         service.getMovieDetails("dbeb1564", imdbId)
             .enqueue(object : Callback<DetailsResponse> {
@@ -68,7 +65,6 @@ class MovieDetailsFragment : BaseFragment() {
             return Bundle().apply { putString(IMDB_ID, imbdId) }
         }
     }
-}
 
     fun setupMovieData(detailsResponse: DetailsResponse) {
 
