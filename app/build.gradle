@@ -35,10 +35,12 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField "String", 'SERVER_URL', "\"http://www.omdbapi.com/\""
+            buildConfigField "String", 'FIREBASE_URL', "\"https://us-central1-akai-movies.cloudfunctions.net\""
 
         }
         debug {
             buildConfigField "String", 'SERVER_URL', "\"http://www.omdbapi.com/\""
+            buildConfigField "String", 'FIREBASE_URL', "\"https://us-central1-akai-movies.cloudfunctions.net\""
         }
     }
 }
@@ -90,4 +92,7 @@ dependencies {
     def drawerlayout_version = "1.0.0"
     implementation "androidx.drawerlayout:drawerlayout:$drawerlayout_version"
 
+    implementation 'com.google.firebase:firebase-auth:19.1.0'
 }
+
+apply plugin: 'com.google.gms.google-services'
