@@ -23,6 +23,11 @@
         android:label="@string/movie_details_fragment"
         tools:layout="@layout/fragment_movie_details">
 
+        <argument
+            android:name="imdbId"
+            app:argType="string"
+            app:nullable="false" />
+
         <action
             android:id="@+id/toSearchMovieFragment"
             app:destination="@id/searchMovieFragment" />
