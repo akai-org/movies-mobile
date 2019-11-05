@@ -2,7 +2,11 @@ package pl.org.akai.movies.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
+import android.widget.ImageButton
 import androidx.navigation.NavArgsLazy
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -52,6 +56,20 @@ class MovieDetailsFragment : BaseFragment() {
 
     private fun navigateBack() {
         findNavController().navigate(R.id.toSearchMovieFragment)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.back, menu)
+        val backItem: MenuItem = menu.findItem(R.id.action_back)
+        val backButton: ImageButton = backItem.actionView as ImageButton
+        backButton.setOnClickListener { findNavController().navigate(R.id.searchMovieFragment) }
+
+        super.onCreateOptionsMenu(menu, inflater)
     }
 
     fun setupMovieData(detailsResponse: DetailsResponse) {

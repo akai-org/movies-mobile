@@ -3,8 +3,8 @@ package pl.org.akai.movies.fragments
 
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
-import android.view.inputmethod.EditorInfo
 import android.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -24,21 +24,26 @@ class SearchMovieFragment : BaseFragment() {
     override val layoutId: Int
         get() = R.layout.fragment_search_movie
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         movieAdapter = MovieAdapter(arrayListOf()) {
             val action = SearchMovieFragmentDirections.toMovieDetails(it.imdbId)
             findNavController().navigate(action)
         }
 
+        getMovies("abc")
+        setupToolbar()
+        initRecyclerView()
 
-//        wyświetlanie przycisku done zamiast lupy na klawiaturze
-        moviesSearchView.imeOptions = EditorInfo.IME_ACTION_DONE
+    }
 
-        moviesSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+    private fun setupToolbar() {
+        toolbar.inflateMenu(R.menu.search_menu)
+        val searchItem: MenuItem = toolbar.menu.findItem(R.id.action_search)
+        val searchView: SearchView = searchItem.actionView as SearchView
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+
             override fun onQueryTextSubmit(query: String): Boolean {
                 getMovies(query)
                 return false
@@ -49,14 +54,18 @@ class SearchMovieFragment : BaseFragment() {
                 return false
             }
         })
-
-
-        initRecyclerView()
-
+        searchView.queryHint = getText(R.string.search_view_text)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+
+
     private fun getMovies(query: String) {
-        if (query.length > 3) { // poniżej 3 jest za dużo wyników
+        if (query.length >= 3) { // poniżej 3 jest za dużo wyników
             service.getSerchedMovies("6ade0e7b", query).enqueue(object : Callback<SearchRespone> {
                 override fun onFailure(call: Call<SearchRespone>, t: Throwable) {}
 

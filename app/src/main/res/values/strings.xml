@@ -4,6 +4,8 @@
     <!--FRAGMENTS-->
     <string name="search_movie_fragment">SearchMovieFragment</string>
     <string name="movie_details_fragment">MovieDetailsFragment</string>
+    <string name="search_view_text">Wyszukaj</string>
+    <string name="back_text">Powróć</string>
     <string name="year">Year: %1$s</string>
     <string name="rated">Rated: %1$s</string>
     <string name="released">Released: %1$s</string>
