@@ -3,7 +3,9 @@ package pl.org.akai.movies.fragments
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.navigation.NavArgsLazy
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_movie_details.*
 import pl.org.akai.movies.R
 import pl.org.akai.movies.data.DetailsResponse
@@ -16,17 +18,17 @@ class MovieDetailsFragment : BaseFragment() {
     override val layoutId: Int
         get() = R.layout.fragment_movie_details
 
+    val args = NavArgsLazy(MovieDetailsFragmentArgs::class) {
+        arguments!!
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val imdbId = getImdbId(arguments)
+        val imdbId = args.value.imdbId
 
         toolbar.navigationIcon = context!!.getDrawable(R.drawable.ic_back)
         toolbar.setNavigationOnClickListener {
-            navigateBack()
-        }
-        backButton.setOnClickListener {
             navigateBack()
         }
 
@@ -38,9 +40,13 @@ class MovieDetailsFragment : BaseFragment() {
                     call: Call<DetailsResponse>, response: Response<DetailsResponse>
                 ) {
                     when (response.code()) {
-                        200 -> Log.d("MyLogMDF", "${response.body()}")
+                        200 -> {
+                            Log.d("MyLogMDF", "${response.body()}")
+                            setupMovieData(response.body()!!)
+                        }
                     }
                 }
+
             })
     }
 
@@ -48,20 +54,25 @@ class MovieDetailsFragment : BaseFragment() {
         findNavController().navigate(R.id.toSearchMovieFragment)
     }
 
-    fun getImdbId(bundle: Bundle?): String {
-        val imdbId = bundle?.getString(IMDB_ID)
-        requireNotNull(imdbId, {
-            "Fragment requires Id from bundle to initialize"
-        })
-        return imdbId
-    }
+    fun setupMovieData(detailsResponse: DetailsResponse) {
 
-    companion object {
-        private val IMDB_ID = "imdbId"
+        title.text = detailsResponse.title
+        year.text = getString(R.string.year, detailsResponse.year)
+        rated.text = getString(R.string.rated, detailsResponse.rated)
+        released.text = getString(R.string.released, detailsResponse.released)
+        genre.text = getString(R.string.genre, detailsResponse.genre)
+        director.text = getString(R.string.director, detailsResponse.director)
+        runtime.text = getString(R.string.runtime, detailsResponse.runtime)
+        writer.text = getString(R.string.writer, detailsResponse.writer)
+        actors.text = getString(R.string.actors, detailsResponse.actors)
+        metascore.text = getString(R.string.metascore, detailsResponse.metascore)
+        dvd.text = getString(R.string.dvd, detailsResponse.dvd)
+        boxOffice.text = getString(R.string.box_office, detailsResponse.boxOffice)
+        production.text = getString(R.string.production, detailsResponse.production)
+        website.text = getString(R.string.website, detailsResponse.website)
 
-        fun createBundle(imbdId: String): Bundle {
-            return Bundle().apply { putString(IMDB_ID, imbdId) }
-        }
+        plot.text = detailsResponse.plot
+
+        Glide.with(context!!).load(detailsResponse.poster).into(poster)
     }
 }
-

@@ -21,7 +21,6 @@ class SearchMovieFragment : BaseFragment() {
 
     private lateinit var movieAdapter: MovieAdapter
 
-
     override val layoutId: Int
         get() = R.layout.fragment_search_movie
 
@@ -33,10 +32,6 @@ class SearchMovieFragment : BaseFragment() {
         movieAdapter = MovieAdapter(arrayListOf()) {
             val action = SearchMovieFragmentDirections.toMovieDetails(it.imdbId)
             findNavController().navigate(action)
-        }
-
-        detailsButton.setOnClickListener {
-            findNavController().navigate(R.id.toMovieDetails)
         }
 
 
@@ -71,7 +66,12 @@ class SearchMovieFragment : BaseFragment() {
                 ) {
                     when (response.code()) {
                         200 -> {
-                            movieAdapter.submitList(response.body()!!.search)
+                            val searchResponse = response.body()!!
+                            if (searchResponse.response) {
+                                movieAdapter.submitList(response.body()!!.search!!)
+                            } else {
+                                //TODO show no movies
+                            }
                         }
                         else -> {
                             Log.d("MyLog", "Call: ${call.request().url()}")
