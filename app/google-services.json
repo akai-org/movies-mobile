@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "453289660993",
+    "firebase_url": "https://akai-movies.firebaseio.com",
+    "project_id": "akai-movies",
+    "storage_bucket": "akai-movies.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453289660993:android:ad8c31866026707c396cc0",
+        "android_client_info": {
+          "package_name": "pl.akai.firebasetest"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453289660993-nqpsu17d34e8oc0qmjjv5dk1cnsmcdt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6-T1-2QvLSfDDgwbNe82YA2qIBBsO3zc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453289660993-nqpsu17d34e8oc0qmjjv5dk1cnsmcdt5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:453289660993:android:f7036147f186f267396cc0",
+        "android_client_info": {
+          "package_name": "pl.org.akai.movies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "453289660993-nqpsu17d34e8oc0qmjjv5dk1cnsmcdt5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6-T1-2QvLSfDDgwbNe82YA2qIBBsO3zc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "453289660993-nqpsu17d34e8oc0qmjjv5dk1cnsmcdt5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
