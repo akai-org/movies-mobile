@@ -65,7 +65,7 @@ class SearchMovieFragment : BaseFragment() {
 
 
     private fun getMovies(query: String) {
-        if (query.length > 3) { // poniżej 3 jest za dużo wyników
+        if (query.length >= 3) { // poniżej 3 jest za dużo wyników
             service.getSerchedMovies("6ade0e7b", query).enqueue(object : Callback<SearchRespone> {
                 override fun onFailure(call: Call<SearchRespone>, t: Throwable) {}
 
