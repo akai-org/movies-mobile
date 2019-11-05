@@ -20,4 +20,5 @@
     <string name="production">Production: %1$s</string>
     <string name="website">Website: %1$s</string>
     <string name="movie_title">Type title</string>
+    <string name="movies_not_found">Movies not found</string>
 </resources>
