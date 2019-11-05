@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.movie_list_item.view.*
 import pl.org.akai.movies.R
 import pl.org.akai.movies.data.Movie
 
-class MovieAdapter(val movies: ArrayList<Movie>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
+class MovieAdapter(val movies: ArrayList<Movie>, private val onItemClick: (Movie) -> Unit) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return MovieViewHolder(
             LayoutInflater.from(parent.context).inflate(R.layout.movie_list_item, parent, false)
@@ -25,9 +25,13 @@ class MovieAdapter(val movies: ArrayList<Movie>) : RecyclerView.Adapter<Recycler
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val movie = movies[position]
+        holder.itemView.setOnClickListener {
+            onItemClick(movie)
+        }
         when (holder) {
             is MovieViewHolder -> {
-                holder.bind(movies[position])
+                holder.bind(movie)
             }
         }
     }
@@ -38,7 +42,7 @@ class MovieAdapter(val movies: ArrayList<Movie>) : RecyclerView.Adapter<Recycler
         notifyDataSetChanged()
     }
 
-    class MovieViewHolder(
+    inner class MovieViewHolder(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
         private val moviePoster: ImageView = itemView.poster
@@ -50,6 +54,7 @@ class MovieAdapter(val movies: ArrayList<Movie>) : RecyclerView.Adapter<Recycler
             movieTitle.text = movie.title
             movieYear.text = movie.year
             movieType.text = movie.type
+
 
             val requestOptions = RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background)
