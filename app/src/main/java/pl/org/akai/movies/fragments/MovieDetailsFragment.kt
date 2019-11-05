@@ -6,8 +6,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
-import androidx.navigation.NavArgsLazy
 import android.widget.ImageButton
+import androidx.navigation.NavArgsLazy
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_movie_details.*
@@ -71,7 +71,6 @@ class MovieDetailsFragment : BaseFragment() {
 
         super.onCreateOptionsMenu(menu, inflater)
     }
-}
 
     fun setupMovieData(detailsResponse: DetailsResponse) {
 

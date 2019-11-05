@@ -3,8 +3,6 @@ package pl.org.akai.movies.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
@@ -29,25 +27,20 @@ class SearchMovieFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         movieAdapter = MovieAdapter(arrayListOf()) {
             val action = SearchMovieFragmentDirections.toMovieDetails(it.imdbId)
             findNavController().navigate(action)
         }
 
-
+        getMovies("abc")
+        setupToolbar()
         initRecyclerView()
 
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.search_menu, menu)
-        val searchItem: MenuItem = menu.findItem(R.id.action_search)
+    private fun setupToolbar() {
+        toolbar.inflateMenu(R.menu.search_menu)
+        val searchItem: MenuItem = toolbar.menu.findItem(R.id.action_search)
         val searchView: SearchView = searchItem.actionView as SearchView
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -61,14 +54,15 @@ class SearchMovieFragment : BaseFragment() {
                 return false
             }
         })
-
         searchView.queryHint = getText(R.string.search_view_text)
+    }
 
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
 
-    }
 
     private fun getMovies(query: String) {
         if (query.length > 3) { // poniżej 3 jest za dużo wyników
