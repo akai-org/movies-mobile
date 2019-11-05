@@ -17,4 +17,5 @@
     <string name="box_office">Box office: %1$s</string>
     <string name="production">Production: %1$s</string>
     <string name="website">Website: %1$s</string>
+    <string name="movie_title">Type title</string>
 </resources>
