@@ -21,7 +21,7 @@ import retrofit2.Response
 
 class SearchMovieFragment : BaseFragment() {
 
-    private val movieAdapter = MovieAdapter(arrayListOf())
+    private lateinit var movieAdapter: MovieAdapter
 
     override val layoutId: Int
         get() = R.layout.fragment_search_movie
@@ -29,9 +29,12 @@ class SearchMovieFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detailsButton.setOnClickListener {
-            findNavController().navigate(R.id.toMovieDetails)
+
+        movieAdapter = MovieAdapter(arrayListOf()) {
+            val action = SearchMovieFragmentDirections.toMovieDetails(it.imdbId)
+            findNavController().navigate(action)
         }
+
 
         initRecyclerView()
 
@@ -65,6 +68,7 @@ class SearchMovieFragment : BaseFragment() {
     }
 
 
+    }
 
     private fun getMovies(query: String) {
         if (query.length > 3) { // poniżej 3 jest za dużo wyników
@@ -77,7 +81,12 @@ class SearchMovieFragment : BaseFragment() {
                 ) {
                     when (response.code()) {
                         200 -> {
-                            movieAdapter.submitList(response.body()!!.search)
+                            val searchResponse = response.body()!!
+                            if (searchResponse.response) {
+                                movieAdapter.submitList(response.body()!!.search!!)
+                            } else {
+                                //TODO show no movies
+                            }
                         }
                         else -> {
                             Log.d("MyLog", "Call: ${call.request().url()}")
