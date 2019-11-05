@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_search_movie.*
@@ -78,8 +79,10 @@ class SearchMovieFragment : BaseFragment() {
                             val searchResponse = response.body()!!
                             if (searchResponse.response) {
                                 movieAdapter.submitList(response.body()!!.search!!)
+                                infoTextView.isVisible = false
                             } else {
-                                //TODO show no movies
+                                movieAdapter.submitList(listOf())
+                                infoTextView.isVisible = true
                             }
                         }
                         else -> {
