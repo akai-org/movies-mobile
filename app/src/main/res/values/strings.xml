@@ -21,4 +21,7 @@
     <string name="website">Website: %1$s</string>
     <string name="movie_title">Type title</string>
     <string name="movies_not_found">Movies not found</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign up</string>
 </resources>
