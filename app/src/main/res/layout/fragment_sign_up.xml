@@ -27,20 +27,26 @@
             android:layout_height="wrap_content"
             android:importantForAutofill="yes"
             android:inputType="textEmailAddress"
-            android:text="@string/email" />
+            android:hint="@string/email" />
 
         <EditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="@string/password"
             android:importantForAutofill="yes"
-            android:inputType="textPassword"
-            android:text="@string/password" />
+            android:inputType="textPassword" />
 
         <Button
+            android:id="@+id/signUpButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/sign_up" />
+
+        <TextView
+            android:id="@+id/errorTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
 
