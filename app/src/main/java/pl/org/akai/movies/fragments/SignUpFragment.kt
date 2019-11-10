@@ -3,27 +3,19 @@ package pl.org.akai.movies.fragments
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.Fragment
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import pl.org.akai.movies.R
 
 
-class SignUpFragment : Fragment() {
+class SignUpFragment : BaseFragment() {
+
+    override val layoutId: Int
+        get() = R.layout.fragment_sign_up
 
     private lateinit var auth: FirebaseAuth
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_sign_up, container, false)
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         auth = FirebaseAuth.getInstance()
@@ -35,7 +27,7 @@ class SignUpFragment : Fragment() {
     }
 
     private fun createUserWithEmailAndPassword(email: String, password: String) {
-        if (email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty()) { // rest of validation is handled by firebase
             showErrorMessage(getString(R.string.wrongEmailOrPassword))
             return
         }
@@ -49,7 +41,7 @@ class SignUpFragment : Fragment() {
 
                 } else {
                     Log.d("Firebase", "createUserWithEmail: error: ${task.exception}")
-                    showErrorMessage(task.exception!!.localizedMessage!!)
+                    showErrorMessage(task.exception!!.localizedMessage)
                 }
             }
     }
