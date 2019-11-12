@@ -24,7 +24,19 @@ class SignUpFragment : BaseFragment() {
             val password: String = passwordEditText.text.toString()
             createUserWithEmailAndPassword(email, password)
         }
+        auth.addAuthStateListener {
+            val user = it.currentUser
+            if (user != null && !user.isEmailVerified) {
+                user.sendEmailVerification()
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("Firebase", "Email sent.")
+                        }
+                    }
+            }
+        }
     }
+
 
     private fun createUserWithEmailAndPassword(email: String, password: String) {
         if (email.isEmpty() || password.isEmpty()) { // rest of validation is handled by firebase
