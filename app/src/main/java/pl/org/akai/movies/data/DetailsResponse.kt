@@ -54,11 +54,11 @@ data class DetailsResponse(
 
     @Expose
     @SerializedName("Awards")
-    val awards: String,
+    val awards: String?,
 
     @Expose
     @SerializedName("Poster")
-    val poster: String,
+    val poster: String?,
 
     @Expose
     @SerializedName("Ratings")
@@ -66,42 +66,42 @@ data class DetailsResponse(
 
     @Expose
     @SerializedName("Metascore")
-    val metascore: String,
+    val metascore: String?,
 
     @Expose
     @SerializedName("imdbRating")
-    val imdbRating: String,
+    val imdbRating: String?,
 
     @Expose
     @SerializedName("imdbVotes")
-    val imdbVotes: String,
+    val imdbVotes: String?,
 
     @Expose
     @SerializedName("imdbID")
-    val imdbID: String,
+    val imdbID: String?,
 
     @Expose
     @SerializedName("Type")
-    val type: String,
+    val type: String?,
 
     @Expose
     @SerializedName("DVD")
-    val dvd: String,
+    val dvd: String?,
 
     @Expose
     @SerializedName("BoxOffice")
-    val boxOffice: String,
+    val boxOffice: String?,
 
     @Expose
     @SerializedName("Production")
-    val production: String,
+    val production: String?,
 
     @Expose
     @SerializedName("Website")
-    val website: String,
+    val website: String?,
 
     @Expose
     @SerializedName("Response")
-    val response: String
+    val response: String?
 
 )
