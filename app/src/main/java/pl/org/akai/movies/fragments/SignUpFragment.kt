@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import pl.org.akai.movies.R
@@ -43,6 +44,8 @@ class SignUpFragment : BaseFragment() {
             showErrorMessage(getString(R.string.wrongEmailOrPassword))
             return
         }
+        signUpProgressBar.isVisible = true
+        signUpButton.isVisible = false
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
@@ -55,6 +58,8 @@ class SignUpFragment : BaseFragment() {
                     Log.d("Firebase", "createUserWithEmail: error: ${task.exception}")
                     showErrorMessage(task.exception!!.localizedMessage)
                 }
+                signUpProgressBar.isVisible = false
+                signUpButton.isVisible = true
             }
     }
 
