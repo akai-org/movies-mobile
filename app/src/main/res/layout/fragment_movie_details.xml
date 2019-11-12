@@ -33,23 +33,16 @@
                 android:src="@drawable/ic_launcher_foreground" />
 
 
-                <TextView
-                    android:id="@+id/plot"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:fontFamily="bold"
-                    android:textSize="@dimen/medium_text" />
+
 
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="5sp"
-                android:singleLine="false"
-                android:text=""
+                android:layout_margin="@dimen/medium_margin"
                 android:textAlignment="center"
-                android:textSize="20sp" />
+                android:fontFamily="bold"
+                android:textSize="@dimen/medium_text" />
 
 
             <TextView
@@ -116,6 +109,13 @@
                 android:id="@+id/website"
                 style="@style/detail"
                 android:text="@string/website" />
+
+            <TextView
+                android:id="@+id/plot"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textSize="@dimen/small_text" />
 
         </LinearLayout>
 
