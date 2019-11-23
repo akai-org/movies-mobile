@@ -21,21 +21,11 @@ class SignUpFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         auth = FirebaseAuth.getInstance()
         signUpButton.setOnClickListener {
-            val email: String = emailEditText.text.toString()
+            val email: String = emailEditText.toString()
             val password: String = passwordEditText.text.toString()
             createUserWithEmailAndPassword(email, password)
         }
-        auth.addAuthStateListener {
-            val user = it.currentUser
-            if (user != null && !user.isEmailVerified) {
-                user.sendEmailVerification()
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Log.d("Firebase", "Email sent.")
-                        }
-                    }
-            }
-        }
+
     }
 
 
@@ -53,6 +43,14 @@ class SignUpFragment : BaseFragment() {
                     errorTextView.text = ""
                     Toast.makeText(context, getString(R.string.accountCreated), Toast.LENGTH_LONG)
                         .show()
+                    auth.addAuthStateListener {
+                        val user = it.currentUser
+                        user?.sendEmailVerification()?.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                Log.d("Firebase", "Email sent.")
+                            }
+                        }
+                    }
 
                 } else {
                     Log.d("Firebase", "createUserWithEmail: error: ${task.exception}")
@@ -64,7 +62,7 @@ class SignUpFragment : BaseFragment() {
     }
 
     private fun showErrorMessage(message: String) {
-        passwordEditText.text.clear()
+//        passwordEditText.text
         errorTextView.text = message
     }
 
