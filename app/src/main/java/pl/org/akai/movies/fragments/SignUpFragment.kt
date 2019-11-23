@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import pl.org.akai.movies.R
 
@@ -38,32 +41,38 @@ class SignUpFragment : BaseFragment() {
         signUpProgressBar.isVisible = true
         signUpButton.isVisible = false
         auth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(activity!!) { task ->
-                if (task.isSuccessful) {
-                    Log.d("Firebase", "createUserWithEmail:success")
-                    errorTextView.text = ""
-                    Toast.makeText(context, getString(R.string.accountCreated), Toast.LENGTH_LONG)
-                        .show()
-                    auth.addAuthStateListener {
-                        val user = it.currentUser
-                        user?.sendEmailVerification()?.addOnCompleteListener { task ->
-                            if (task.isSuccessful) {
-                                Log.d("Firebase", "Email sent.")
-                            }
+            .addOnSuccessListener(activity!!) {
+                Log.d("Firebase", "createUserWithEmail:success")
+                errorTextView.text = ""
+                Toast.makeText(context, getString(R.string.accountCreated), Toast.LENGTH_LONG)
+                    .show()
+                auth.addAuthStateListener {
+                    val user = it.currentUser
+                    user?.sendEmailVerification()?.addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            Log.d("Firebase", "Email sent.")
                         }
                     }
-
-                } else {
-                    Log.d("Firebase", "createUserWithEmail: error: ${task.exception}")
-                    showErrorMessage(task.exception!!.localizedMessage)
                 }
+            }.addOnFailureListener(activity!!) {
+                Log.d("Firebase", "createUserWithEmail: error: $it")
+                showErrorMessage(
+                    when (it) {
+                        is FirebaseAuthWeakPasswordException -> getString(R.string.weakPassword)
+                        is FirebaseAuthInvalidCredentialsException -> getString(R.string.invalidCredentials)
+                        is FirebaseAuthUserCollisionException -> getString(R.string.userCollision)
+                        else -> getString(R.string.unexpectedError)
+                    }
+                )
+            }.addOnCompleteListener {
                 signUpProgressBar.isVisible = false
                 signUpButton.isVisible = true
             }
+
     }
 
     private fun showErrorMessage(message: String) {
-//        passwordEditText.text
+        passwordEditText.text!!.clear()
         errorTextView.text = message
     }
 

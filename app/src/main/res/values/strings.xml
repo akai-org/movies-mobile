@@ -26,4 +26,8 @@
     <string name="sign_up">Sign up</string>
     <string name="wrongEmailOrPassword">"Wrong email and/or password"</string>
     <string name="accountCreated">Account created.</string>
+    <string name="weakPassword">Password must be at least 6 characters long.</string>
+    <string name="invalidCredentials">Wrong email.</string>
+    <string name="userCollision">Email is already in use.</string>
+    <string name="unexpectedError">Unexpected error.</string>
 </resources>
