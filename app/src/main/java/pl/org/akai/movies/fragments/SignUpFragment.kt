@@ -22,7 +22,7 @@ class SignUpFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         auth = FirebaseAuth.getInstance()
         signUpButton.setOnClickListener {
-            val email: String = (emailEditText as TextInputEditText).text.toString()
+            val email: String = emailEditText.text.toString()
             val password: String = (passwordEditText as TextInputEditText).text.toString()
             createUserWithEmailAndPassword(email, password)
         }
