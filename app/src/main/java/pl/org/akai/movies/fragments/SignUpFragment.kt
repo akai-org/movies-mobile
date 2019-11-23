@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_sign_up.*
 import pl.org.akai.movies.R
@@ -21,8 +22,8 @@ class SignUpFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         auth = FirebaseAuth.getInstance()
         signUpButton.setOnClickListener {
-            val email: String = emailEditText.toString()
-            val password: String = passwordEditText.text.toString()
+            val email: String = (emailEditText as TextInputEditText).text.toString()
+            val password: String = (passwordEditText as TextInputEditText).text.toString()
             createUserWithEmailAndPassword(email, password)
         }
 
