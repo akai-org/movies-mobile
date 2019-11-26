@@ -31,4 +31,7 @@
     <string name="userCollision">Email is already in use.</string>
     <string name="unexpectedError">Unexpected error.</string>
     <string name="poster">poster</string>
+    <string name="sing_in">Sing in</string>
+    <string name="login">login</string>
+    <string name="password">password</string>
 </resources>
