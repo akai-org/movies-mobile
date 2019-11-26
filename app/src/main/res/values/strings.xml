@@ -21,6 +21,16 @@
     <string name="website">Website: %1$s</string>
     <string name="movie_title">Type title</string>
     <string name="movies_not_found">Movies not found</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign up</string>
+    <string name="wrongEmailOrPassword">"Wrong email and/or password"</string>
+    <string name="accountCreated">Account created.</string>
+    <string name="weakPassword">Password must be at least 6 characters long.</string>
+    <string name="invalidCredentials">Wrong email.</string>
+    <string name="userCollision">Email is already in use.</string>
+    <string name="unexpectedError">Unexpected error.</string>
+    <string name="poster">poster</string>
     <string name="sing_in">Sing in</string>
     <string name="login">login</string>
     <string name="password">password</string>

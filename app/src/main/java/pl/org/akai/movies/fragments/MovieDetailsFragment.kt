@@ -7,6 +7,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.ImageButton
+import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.navigation.NavArgsLazy
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -73,24 +75,33 @@ class MovieDetailsFragment : BaseFragment() {
     }
 
     fun setupMovieData(detailsResponse: DetailsResponse) {
-
+        Log.d("MyLog", "$detailsResponse")
         title.text = detailsResponse.title
         year.text = getString(R.string.year, detailsResponse.year)
         rated.text = getString(R.string.rated, detailsResponse.rated)
-        released.text = getString(R.string.released, detailsResponse.released)
-        genre.text = getString(R.string.genre, detailsResponse.genre)
-        director.text = getString(R.string.director, detailsResponse.director)
-        runtime.text = getString(R.string.runtime, detailsResponse.runtime)
-        writer.text = getString(R.string.writer, detailsResponse.writer)
-        actors.text = getString(R.string.actors, detailsResponse.actors)
-        metascore.text = getString(R.string.metascore, detailsResponse.metascore)
-        dvd.text = getString(R.string.dvd, detailsResponse.dvd)
-        boxOffice.text = getString(R.string.box_office, detailsResponse.boxOffice)
-        production.text = getString(R.string.production, detailsResponse.production)
-        website.text = getString(R.string.website, detailsResponse.website)
+
+        checkNull(detailsResponse.released, released, R.string.released)
+        checkNull(detailsResponse.genre, genre, R.string.genre)
+        checkNull(detailsResponse.director, director, R.string.director)
+        checkNull(detailsResponse.runtime, director, R.string.runtime)
+        checkNull(detailsResponse.writer, writer, R.string.writer)
+        checkNull(detailsResponse.actors, actors, R.string.actors)
+        checkNull(detailsResponse.metascore, metascore, R.string.metascore)
+        checkNull(detailsResponse.dvd, dvd, R.string.dvd)
+        checkNull(detailsResponse.boxOffice, boxOffice, R.string.box_office)
+        checkNull(detailsResponse.production, production, R.string.production)
+        checkNull(detailsResponse.website, website, R.string.website)
 
         plot.text = detailsResponse.plot
 
         Glide.with(context!!).load(detailsResponse.poster).into(poster)
+    }
+
+    private fun checkNull(text: String?, textView: TextView, sId: Int) {
+        if (text == null) {
+            textView.isVisible = false
+        } else {
+            textView.text = getString(sId, text)
+        }
     }
 }
