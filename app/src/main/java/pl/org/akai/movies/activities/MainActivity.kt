@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        drawer_layout.openDrawer(GravityCompat.START)
+
     }
 
     override fun onBackPressed() {

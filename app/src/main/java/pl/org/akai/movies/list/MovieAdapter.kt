@@ -45,6 +45,9 @@ class MovieAdapter(val movies: ArrayList<Movie>, private val onItemClick: (Movie
     inner class MovieViewHolder(
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
+
+        val regex = Regex("[0-9][0-9][0-9][0-9]")
+
         private val moviePoster: ImageView = itemView.poster
         private val movieTitle: TextView = itemView.title
         private val movieYear: TextView = itemView.year

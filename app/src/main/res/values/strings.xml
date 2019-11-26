@@ -30,4 +30,5 @@
     <string name="invalidCredentials">Wrong email.</string>
     <string name="userCollision">Email is already in use.</string>
     <string name="unexpectedError">Unexpected error.</string>
+    <string name="poster">poster</string>
 </resources>
