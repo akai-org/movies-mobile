@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
@@ -48,8 +49,9 @@ class SignUpFragment : BaseFragment() {
                     .show()
                 auth.addAuthStateListener {
                     val user = it.currentUser
-                    user?.sendEmailVerification()?.addOnCompleteListener { task ->
+                    user!!.sendEmailVerification().addOnCompleteListener { task ->
                         if (task.isSuccessful) {
+                            findNavController().navigate(SignUpFragmentDirections.toSignIn())
                             Log.d("Firebase", "Email sent.")
                         }
                     }

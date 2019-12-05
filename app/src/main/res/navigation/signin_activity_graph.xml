@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signIn_activity_graph"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="pl.org.akai.movies.fragments.SignInFragment"
+        android:label="sighInFragment"
+        tools:layout="@layout/fragment_singin">
+
+        <action
+            android:id="@+id/toSingUp"
+            app:destination="@id/signUpFragment" />
+
+        <action
+            android:id="@+id/toMainActivity"
+            app:destination="@id/mainActivity" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="pl.org.akai.movies.fragments.SignUpFragment"
+        android:label="signUpFragment"
+        tools:layout="@layout/fragment_sign_up">
+
+        <action
+            android:id="@+id/toSignIn"
+            app:destination="@id/signInFragment" />
+    </fragment>
+
+    <activity
+        android:id="@+id/mainActivity"
+        android:name="pl.org.akai.movies.activities.MainActivity"
+        tools:layout="@layout/activity_main" />
+
+
+</navigation>

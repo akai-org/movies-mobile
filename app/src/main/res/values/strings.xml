@@ -2,7 +2,8 @@
     <string name="app_name">AkaiMovies</string>
 
     <!--FRAGMENTS-->
-    <string name="search_movie_fragment">SearchMovieFragment</string>
+    <string name="search_movie_fragment">FavoriteMovieFragment</string>
+    <string name="favorite_movie_fragment">SearchMovieFragment</string>
     <string name="movie_details_fragment">MovieDetailsFragment</string>
     <string name="search_view_text">Wyszukaj</string>
     <string name="back_text">Powróć</string>
@@ -21,6 +22,7 @@
     <string name="website">Website: %1$s</string>
     <string name="movie_title">Type title</string>
     <string name="movies_not_found">Movies not found</string>
+    <string name="no_favorite_movies">No favorite movies</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="sign_up">Sign up</string>
@@ -33,5 +35,8 @@
     <string name="poster">poster</string>
     <string name="sing_in">Sing in</string>
     <string name="login">login</string>
-    <string name="password">password</string>
+    <string name="sing_up">Sign up</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

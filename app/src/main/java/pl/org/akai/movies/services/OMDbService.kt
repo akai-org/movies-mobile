@@ -15,4 +15,5 @@ interface OMDbService {
     @GET("/")
     fun getMovieDetails(@Query("apikey") apikey: String, @Query("i") imdbID: String):
             Call<DetailsResponse>
+
 }
