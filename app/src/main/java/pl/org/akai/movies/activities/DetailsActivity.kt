@@ -1,44 +1,48 @@
-package pl.org.akai.movies.fragments
+package pl.org.akai.movies.activities
 
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.MenuItem
-import android.view.View
-import android.widget.ImageButton
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.NavArgsLazy
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.navArgs
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.fragment_movie_details.*
+import kotlinx.android.synthetic.main.activity_details.*
+import pl.org.akai.movies.BuildConfig
 import pl.org.akai.movies.R
 import pl.org.akai.movies.data.DetailsResponse
+import pl.org.akai.movies.services.OMDbService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-class MovieDetailsFragment : BaseFragment() {
+class DetailsActivity : AppCompatActivity() {
 
-    override val layoutId: Int
-        get() = R.layout.fragment_movie_details
+    private val retrofit = Retrofit.Builder()
+        .baseUrl(BuildConfig.SERVER_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .build()
 
-    val args = NavArgsLazy(MovieDetailsFragmentArgs::class) {
-        arguments!!
-    }
+    private val service = retrofit.create(OMDbService::class.java)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private val args: DetailsActivityArgs by navArgs()
 
-        val imdbId = args.value.imdbId
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_details)
 
-        toolbar.navigationIcon = context!!.getDrawable(R.drawable.ic_back)
+        setSupportActionBar(toolbar)
+
+        title = ""
+        toolbar.title = ""
+        toolbar.navigationIcon = getDrawable(R.drawable.ic_back)
         toolbar.setNavigationOnClickListener {
-            navigateBack()
+            finish()
         }
-
-        service.getMovieDetails("dbeb1564", imdbId)
+        service.getMovieDetails("dbeb1564", args.imdbId)
             .enqueue(object : Callback<DetailsResponse> {
                 override fun onFailure(call: Call<DetailsResponse>, t: Throwable) {}
 
@@ -56,27 +60,18 @@ class MovieDetailsFragment : BaseFragment() {
             })
     }
 
-    private fun navigateBack() {
-        findNavController().navigate(R.id.toSearchMovieFragment)
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item!!.itemId) {
+            android.R.id.home -> {
+                finish()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.back, menu)
-        val backItem: MenuItem = menu.findItem(R.id.action_back)
-        val backButton: ImageButton = backItem.actionView as ImageButton
-        backButton.setOnClickListener { findNavController().navigate(R.id.searchMovieFragment) }
-
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    fun setupMovieData(detailsResponse: DetailsResponse) {
+    private fun setupMovieData(detailsResponse: DetailsResponse) {
         Log.d("MyLog", "$detailsResponse")
-        title.text = detailsResponse.title
+        titleTv.text = detailsResponse.title
         year.text = getString(R.string.year, detailsResponse.year)
         rated.text = getString(R.string.rated, detailsResponse.rated)
 
@@ -94,8 +89,9 @@ class MovieDetailsFragment : BaseFragment() {
 
         plot.text = detailsResponse.plot
 
-        Glide.with(context!!).load(detailsResponse.poster).into(poster)
+        Glide.with(this).load(detailsResponse.poster).into(poster)
     }
+
 
     private fun checkNull(text: String?, textView: TextView, sId: Int) {
         if (text == null) {
@@ -104,4 +100,10 @@ class MovieDetailsFragment : BaseFragment() {
             textView.text = getString(sId, text)
         }
     }
+
+    override fun onBackPressed() {
+        finish()
+        super.onBackPressed()
+    }
+
 }

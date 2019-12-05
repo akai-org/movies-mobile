@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavArgsLazy
 import okhttp3.OkHttpClient
 import pl.org.akai.movies.BuildConfig
+import pl.org.akai.movies.activities.DetailsActivityArgs
 import pl.org.akai.movies.services.FirebaseService
 import pl.org.akai.movies.services.OMDbService
 import retrofit2.Retrofit
@@ -18,6 +20,10 @@ abstract class BaseFragment : Fragment() {
     abstract val layoutId: Int
 
     private lateinit var token: String
+
+    val args = NavArgsLazy(DetailsActivityArgs::class) {
+        arguments!!
+    }
 
     private val retrofit = Retrofit.Builder()
         .baseUrl(BuildConfig.SERVER_URL)

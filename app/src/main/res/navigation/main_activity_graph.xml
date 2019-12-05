@@ -13,24 +13,9 @@
 
         <action
             android:id="@+id/toMovieDetails"
-            app:destination="@id/movieDetailsFragment" />
+            app:destination="@id/detailsActivity" />
     </fragment>
 
-    <fragment
-        android:id="@+id/movieDetailsFragment"
-        android:name="pl.org.akai.movies.fragments.MovieDetailsFragment"
-        android:label="@string/movie_details_fragment"
-        tools:layout="@layout/fragment_movie_details">
-
-        <argument
-            android:name="imdbId"
-            app:argType="string"
-            app:nullable="false" />
-
-        <action
-            android:id="@+id/toSearchMovieFragment"
-            app:destination="@id/searchMovieFragment" />
-    </fragment>
 
     <fragment
         android:id="@+id/favoriteMoviesFragment"
@@ -40,7 +25,28 @@
 
         <action
             android:id="@+id/toMovieDetails"
-            app:destination="@id/movieDetailsFragment" />
+            app:destination="@id/detailsActivity" />
     </fragment>
+
+    <action
+        android:id="@+id/globalToFavoritesMovies"
+        app:destination="@id/favoriteMoviesFragment" />
+
+    <action
+        android:id="@+id/globalToSearchMovieFragment"
+        app:destination="@id/searchMovieFragment" />
+
+
+    <activity
+        android:id="@+id/detailsActivity"
+        android:name="pl.org.akai.movies.activities.DetailsActivity"
+        tools:layout="@layout/activity_details">
+
+        <argument
+            android:name="imdbId"
+            app:argType="string"
+            app:nullable="false" />
+    </activity>
+
 
 </navigation>

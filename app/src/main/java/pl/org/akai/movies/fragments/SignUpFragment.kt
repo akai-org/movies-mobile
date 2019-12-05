@@ -44,7 +44,7 @@ class SignUpFragment : BaseFragment() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener(activity!!) {
                 Log.d("Firebase", "createUserWithEmail:success")
-                errorTextView.text = ""
+                emailTextInputLayout.error = ""
                 Toast.makeText(context, getString(R.string.accountCreated), Toast.LENGTH_LONG)
                     .show()
                 auth.addAuthStateListener {
@@ -75,7 +75,7 @@ class SignUpFragment : BaseFragment() {
 
     private fun showErrorMessage(message: String) {
         passwordEditText.text!!.clear()
-        errorTextView.text = message
+        emailTextInputLayout.error = message
     }
 
 

@@ -1,13 +1,12 @@
 package pl.org.akai.movies.services
 
-import pl.org.akai.movies.data.SearchRespone
+import pl.org.akai.movies.data.FavoritesResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Query
 
 interface FirebaseService {
 
     @GET("/getFavoritesMovies")
-    fun getFavoriteMovies(@Query("apikey") apikey: String, @Query("s") query: String):
-            Call<SearchRespone>
+    fun getFavoriteMovies():
+            Call<FavoritesResponse>
 }
