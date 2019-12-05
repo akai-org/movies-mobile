@@ -1,18 +1,15 @@
 package pl.org.akai.movies.fragments
 
 import android.content.ContentValues.TAG
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.navigation.NavArgsLazy
+import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import kotlinx.android.synthetic.main.fragment_search_movie.view.*
 import kotlinx.android.synthetic.main.fragment_singin.*
 import pl.org.akai.movies.R
-import pl.org.akai.movies.activities.MainActivity
 
 
 class SignInFragment : BaseFragment() {
@@ -23,9 +20,8 @@ class SignInFragment : BaseFragment() {
         get() = R.layout.fragment_singin
 
     private fun updateUI() {
-        val intent = Intent(context, MovieDetailsFragment::class.java)
-        startActivity(intent)
-
+        findNavController().navigate(SignInFragmentDirections.toMainActivity())
+        activity?.finish()
     }
 
 
@@ -35,18 +31,17 @@ class SignInFragment : BaseFragment() {
         auth = FirebaseAuth.getInstance()
 
 
-        button.setOnClickListener {
-            Log.d("mycall:", "clicked")
-
+        signInButton.setOnClickListener {
             val v_login = login.text.toString()
             val v_password = password.text.toString()
-
-            Log.d("My2 log:", v_login)
-            Log.d("My2 pass:", v_password)
-
-
             singIn(v_login, v_password)
         }
+
+        signUpButton.setOnClickListener {
+            findNavController().navigate(SignInFragmentDirections.toSingUp())
+        }
+
+
     }
 
     private fun singIn(login: String, pass: String) {
