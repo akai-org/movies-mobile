@@ -94,6 +94,7 @@ dependencies {
     def drawerlayout_version = "1.0.0"
     implementation "androidx.drawerlayout:drawerlayout:$drawerlayout_version"
 
+    //firebase
     implementation 'com.google.firebase:firebase-auth:19.1.0'
 }
 

@@ -4,7 +4,7 @@
     <dimen name="medium_text">31sp</dimen>
     <dimen name="small_text">16sp</dimen>
 
-    <dimen name="medium_margin">10dp</dimen>
+    <dimen name="medium_margin">8dp</dimen>
     <dimen name="card_corner_radius">10dp</dimen>
 
 
