@@ -25,7 +25,6 @@ abstract class BaseFragment : Fragment() {
         .build()
     val service = retrofit.create(OMDbService::class.java)
 
-
     val client = OkHttpClient.Builder().addInterceptor { chain ->
 
         val newRequest = chain.request().newBuilder()

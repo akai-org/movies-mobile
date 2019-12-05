@@ -49,7 +49,7 @@ class SignUpFragment : BaseFragment() {
                     .show()
                 auth.addAuthStateListener {
                     val user = it.currentUser
-                    user.sendEmailVerification().addOnCompleteListener { task ->
+                    user!!.sendEmailVerification().addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             findNavController().navigate(SignUpFragmentDirections.toSignIn())
                             Log.d("Firebase", "Email sent.")

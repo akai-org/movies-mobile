@@ -5,7 +5,6 @@
     android:id="@+id/main_activity_graph"
     app:startDestination="@id/searchMovieFragment">
 
-
     <fragment
         android:id="@+id/searchMovieFragment"
         android:name="pl.org.akai.movies.fragments.SearchMovieFragment"
@@ -31,6 +30,17 @@
         <action
             android:id="@+id/toSearchMovieFragment"
             app:destination="@id/searchMovieFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoriteMoviesFragment"
+        android:name="pl.org.akai.movies.fragments.FavoriteMoviesFragment"
+        android:label="@string/favorite_movie_fragment"
+        tools:layout="@layout/fragment_favorite_movies">
+
+        <action
+            android:id="@+id/toMovieDetails"
+            app:destination="@id/movieDetailsFragment" />
     </fragment>
 
 </navigation>
