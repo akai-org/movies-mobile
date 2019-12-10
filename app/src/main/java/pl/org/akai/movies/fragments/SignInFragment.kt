@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_singin.*
@@ -18,6 +19,11 @@ class SignInFragment : BaseFragment() {
 
     override val layoutId: Int
         get() = R.layout.fragment_singin
+
+    private fun updateEnabled() {
+        signInButton.isEnabled =
+            emailEditText.text.toString().isNotBlank() && passwordEditText.text.toString().isNotBlank()
+    }
 
     private fun openMainActivity() {
         findNavController().navigate(SignInFragmentDirections.toMainActivity())
@@ -32,8 +38,8 @@ class SignInFragment : BaseFragment() {
 
 
         signInButton.setOnClickListener {
-            val login = login.text.toString()
-            val password = password.text.toString()
+            val login = emailEditText.text.toString()
+            val password = passwordEditText.text.toString()
             singIn(login, password)
         }
 
@@ -41,7 +47,12 @@ class SignInFragment : BaseFragment() {
             findNavController().navigate(SignInFragmentDirections.toSingUp())
         }
 
-
+        emailEditText.addTextChangedListener {
+            updateEnabled()
+        }
+        passwordEditText.addTextChangedListener {
+            updateEnabled()
+        }
     }
 
     private fun singIn(login: String, pass: String) {

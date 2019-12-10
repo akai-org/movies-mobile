@@ -77,6 +77,7 @@ class SearchMovieFragment : BaseFragment() {
                         200 -> {
                             val searchResponse = response.body()!!
                             if (searchResponse.response) {
+                                Log.d("results", response.body()!!.search!!.size.toString())
                                 movieAdapter.submitList(response.body()!!.search!!)
                                 infoTextView.isVisible = false
                             } else {

@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
@@ -30,6 +31,14 @@ class SignUpFragment : BaseFragment() {
             val password: String = (passwordEditText as TextInputEditText).text.toString()
             createUserWithEmailAndPassword(email, password)
         }
+
+        passwordEditText.addTextChangedListener {
+            updateEnabled()
+        }
+        backButton.setOnClickListener {
+            findNavController().navigate(SignUpFragmentDirections.toSignIn())
+        }
+
 
     }
 
@@ -76,6 +85,11 @@ class SignUpFragment : BaseFragment() {
     private fun showErrorMessage(message: String) {
         passwordEditText.text!!.clear()
         emailTextInputLayout.error = message
+    }
+
+    private fun updateEnabled() {
+        signUpButton.isEnabled =
+            emailEditText.text.toString().isNotBlank() && passwordEditText.text.toString().isNotBlank()
     }
 
 
