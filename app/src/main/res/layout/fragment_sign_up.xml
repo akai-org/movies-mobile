@@ -10,6 +10,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/emailTextInputLayout"
+        style="@style/textInputStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -24,6 +25,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/textInputStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -39,9 +41,18 @@
 
     <Button
         android:id="@+id/signUpButton"
+        style="@style/buttonStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="@string/sign_up" />
+
+    <Button
+        android:id="@+id/backButton"
+        style="@style/buttonStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/back_to_sign_in" />
 
     <ProgressBar
         android:id="@+id/signUpProgressBar"
