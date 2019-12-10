@@ -46,7 +46,6 @@ class MovieAdapter(val movies: ArrayList<Movie>, private val onItemClick: (Movie
         itemView: View
     ) : RecyclerView.ViewHolder(itemView) {
 
-        val regex = Regex("[0-9][0-9][0-9][0-9]")
 
         private val moviePoster: ImageView = itemView.poster
         private val movieTitle: TextView = itemView.title
@@ -55,7 +54,7 @@ class MovieAdapter(val movies: ArrayList<Movie>, private val onItemClick: (Movie
 
         fun bind(movie: Movie) {
             movieTitle.text = movie.title
-            movieYear.text = movie.year
+            movieYear.text = removeUnnecessaryHyphen(movie.year)
             movieType.text = movie.type
 
 
@@ -71,5 +70,10 @@ class MovieAdapter(val movies: ArrayList<Movie>, private val onItemClick: (Movie
         }
     }
 
-
+    fun removeUnnecessaryHyphen(year: String): String {
+        if (year.length == 5) {
+            return year.subSequence(0, 4).toString()
+        }
+        return year
+    }
 }

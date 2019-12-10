@@ -1,5 +1,6 @@
 package pl.org.akai.movies.fragments
 
+import android.app.Activity
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -7,7 +8,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_singin.*
 import pl.org.akai.movies.R
 
@@ -19,7 +19,7 @@ class SignInFragment : BaseFragment() {
     override val layoutId: Int
         get() = R.layout.fragment_singin
 
-    private fun updateUI() {
+    private fun openMainActivity() {
         findNavController().navigate(SignInFragmentDirections.toMainActivity())
         activity?.finish()
     }
@@ -32,9 +32,9 @@ class SignInFragment : BaseFragment() {
 
 
         signInButton.setOnClickListener {
-            val v_login = login.text.toString()
-            val v_password = password.text.toString()
-            singIn(v_login, v_password)
+            val login = login.text.toString()
+            val password = password.text.toString()
+            singIn(login, password)
         }
 
         signUpButton.setOnClickListener {
@@ -48,10 +48,11 @@ class SignInFragment : BaseFragment() {
         auth.signInWithEmailAndPassword(login, pass)
             .addOnCompleteListener(activity!!) { task ->
                 if (task.isSuccessful) {
-
-                    Log.d(TAG, "signInWithEmail:success")
-                    //val user = auth.currentUser
-                    updateUI()
+                    auth.getAccessToken(true).addOnSuccessListener {
+                        Log.d("MyLog", "Token: ${it.token}")
+                        saveToken(it.token!!)
+                        openMainActivity()
+                    }
                 } else {
                     // If sign in fails, display a message to the user.
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -62,6 +63,14 @@ class SignInFragment : BaseFragment() {
 
                 }
             }
+    }
+
+    private fun saveToken(token: String) {
+        val preferences =
+            activity!!.getSharedPreferences("pl.org.akai.userPref", Activity.MODE_PRIVATE)
+        val editor = preferences.edit()
+        editor.putString(TOKEN, token)
+        editor.apply()
     }
 
 }

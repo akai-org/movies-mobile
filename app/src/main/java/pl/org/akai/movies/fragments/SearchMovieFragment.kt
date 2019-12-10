@@ -29,8 +29,7 @@ class SearchMovieFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         movieAdapter = MovieAdapter(arrayListOf()) {
-            val action = SearchMovieFragmentDirections.toMovieDetails(it.imdbId)
-            findNavController().navigate(action)
+            findNavController().navigate(SearchMovieFragmentDirections.toMovieDetails(it.imdbId))
         }
 
         getMovies("abc")

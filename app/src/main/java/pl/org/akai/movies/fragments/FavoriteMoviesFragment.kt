@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.fragment_search_movie.*
 import pl.org.akai.movies.R
-import pl.org.akai.movies.data.SearchRespone
+import pl.org.akai.movies.data.FavoritesResponse
 import pl.org.akai.movies.list.MovieAdapter
 import pl.org.akai.movies.list.TopSpacingItemDecoration
 import retrofit2.Call
@@ -66,24 +66,19 @@ class FavoriteMoviesFragment : BaseFragment() {
 
     private fun getMovies(query: String) {
         if (query.length >= 3) { // poniżej 3 jest za dużo wyników
-            firebaseService.getFavoriteMovies("6ade0e7b", query)
-                .enqueue(object : Callback<SearchRespone> {
-                    override fun onFailure(call: Call<SearchRespone>, t: Throwable) {}
+            firebaseService.getFavoriteMovies()
+                .enqueue(object : Callback<FavoritesResponse> {
+                    override fun onFailure(call: Call<FavoritesResponse>, t: Throwable) {}
 
                     override fun onResponse(
-                        call: Call<SearchRespone>,
-                        response: Response<SearchRespone>
+                        call: Call<FavoritesResponse>,
+                        response: Response<FavoritesResponse>
                     ) {
                         when (response.code()) {
                             200 -> {
-                                val searchResponse = response.body()!!
-                                if (searchResponse.response) {
-                                    movieAdapter.submitList(response.body()!!.search!!)
-                                    infoTextView.isVisible = false
-                                } else {
-                                    movieAdapter.submitList(listOf())
-                                    infoTextView.isVisible = true
-                                }
+                                val favoritesResponse = response.body()!!
+                                movieAdapter.submitList(favoritesResponse.favoriteMovies)
+                                infoTextView.isVisible = favoritesResponse.favoriteMovies.isEmpty()
                             }
                             else -> {
                                 Log.d("MyLog", "Call: ${call.request().url()}")
